@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ $# -eq 2 ] && [ -e $1 ] && [ -e $2 ]; then
+    f1=$(stat -L -c %d:%i $1)
+    f2=$(stat -L -c %d:%i $2)
+    if [ $f1 = $f2 ]; then
+        echo "reverse: input and output file must differ" >&2
+        exit 1
+    fi
+fi
+
+./_reverse $@
